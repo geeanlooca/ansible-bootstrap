@@ -1,0 +1,17 @@
+- name: Remove fzf package installed from the package manager
+  become: true
+  package:
+    name: fzf
+    state: absent
+
+- name: Clone the fzf git reposity
+  git:
+    repo: https://github.com/junegunn/fzf.git
+    dest: /home/gianluca/.fzf
+    depth: 1
+
+- name: Install fzf
+  command: /home/gianluca/.fzf/install --all --no-update-rc --key-bindings --completion --no-bash --no-fish
+  args:
+    creates: /home/gianluca/.fzf/bin/fzf
+

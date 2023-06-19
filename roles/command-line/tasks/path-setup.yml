@@ -1,0 +1,24 @@
+- name: Make sure ~/bin and ~/.local/bin exist
+  file:
+    path: /home/gianluca/{{ item }}
+    state: directory
+    mode: '0755'
+    owner: gianluca
+    group: gianluca
+  tags: path
+  loop:
+    - bin
+    - .local/bin
+
+
+- name: Make sure ~/bin and ~/.local/bin are in the PATH
+  lineinfile:
+    dest: /home/gianluca/{{ item }}
+    regexp: '^export PATH=.*'
+    line: 'export PATH="$HOME/bin:$HOME/.local/bin:$PATH"'
+    state: present
+    insertafter: '^# User configuration'
+  loop:
+    - .bashrc
+    - .zshrc
+  tags: path

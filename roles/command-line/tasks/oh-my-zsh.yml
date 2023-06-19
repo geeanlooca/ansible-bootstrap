@@ -1,0 +1,25 @@
+- name: Configure zsh using oh-my-zsh
+  include_role:
+    name: gantsign.oh-my-zsh
+  vars:
+    users:
+      - username: gianluca
+        oh_my_zsh:
+          theme: gnzh
+          plugins:
+            - git
+            - vi-mode
+            - history-substring-search
+            - zsh-autosuggestions
+            - fasd
+            - fzf
+
+- name: Install zsh-autosuggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: /home/gianluca/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+- name: Install the configuration file
+  copy:
+    src: .zshrc
+    dest: /home/gianluca/.zshrc

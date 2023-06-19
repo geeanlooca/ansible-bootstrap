@@ -1,0 +1,25 @@
+---
+- name: Install fancy command line utilities
+  become: true
+  package:
+    name:
+      - bat
+      - fd-find
+      - ripgrep
+      - ranger
+      - zoxide
+    state: latest
+
+- name: Symbolic link to fdfind executable for Debian based systems
+  file:
+    src: /usr/bin/fdfind
+    dest: /home/gianluca/.local/bin/fd
+    state: link
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+
+- name: Symbolic link to bat executable for Debian based systems
+  file:
+    src: /usr/bin/batcat
+    dest: /home/gianluca/.local/bin/bat
+    state: link
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'

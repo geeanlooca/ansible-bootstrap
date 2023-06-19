@@ -1,0 +1,12 @@
+---
+- hosts: vps
+  roles:
+    - command-line
+    - nginx
+
+- hosts: local
+  roles:
+    - command-line
+    
+
+

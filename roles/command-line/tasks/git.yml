@@ -1,0 +1,13 @@
+- name: Set git identity
+  git_config:
+    scope: global
+    name: user.name
+    value: Gianluca Marcon
+  tags: git
+
+- name: Set git email
+  git_config:
+    scope: global
+    name: user.email
+    value: marcon.gluca@gmail.com
+  tags: git

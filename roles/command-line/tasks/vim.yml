@@ -1,0 +1,18 @@
+- name: Install vim
+  package:
+    name: vim
+    state: latest
+
+- name: Install vim configuration
+  copy:
+    src: .vimrc
+    dest: /home/gianluca/.vimrc
+
+
+- name: Install Vundle - vim plugin manager
+  git:
+    repo: https://github.com/VundleVim/Vundle.vim.git 
+    dest: /home/gianluca/.vim/bundle/Vundle.vim
+
+- name: Install vim plugins
+  command: vim -E -s -c "source /home/gianluca/.vimrc" -c PluginInstall -c qa

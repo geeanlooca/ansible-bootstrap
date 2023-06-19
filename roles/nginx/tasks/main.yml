@@ -1,0 +1,7 @@
+---
+- name: Install nginx web server
+  become: true
+  package:
+    name: 
+      - nginx
+    state: present
