@@ -1,3 +1,9 @@
+- name: Install git
+  package:
+    name: git
+    state: latest
+  tags: git
+
 - name: Set git identity
   git_config:
     scope: global

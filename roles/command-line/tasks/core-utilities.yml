@@ -3,12 +3,8 @@
   become: true
   package:
     name:
-      - git
       - htop
       - iotop
-      - vim
-      - neovim
-      - tmux
       - wget
       - curl
       - unzip
@@ -19,11 +15,6 @@
       - rsync
       - python3
       - python3-pip
-      - zsh
     state: present
 
 
-- name: Install the tmux configuration file
-  copy:
-    src: .tmux.conf
-    dest: /home/gianluca/.tmux.conf

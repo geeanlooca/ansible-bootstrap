@@ -10,7 +10,6 @@
     - bin
     - .local/bin
 
-
 - name: Make sure ~/bin and ~/.local/bin are in the PATH
   lineinfile:
     dest: /home/gianluca/{{ item }}

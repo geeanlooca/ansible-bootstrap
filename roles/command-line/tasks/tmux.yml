@@ -1,0 +1,12 @@
+- name: Install tmux
+  become: true
+  package:
+    name: tmux
+    state: latest
+  tags: tmux
+
+- name: Install the tmux configuration file
+  copy:
+    src: .tmux.conf
+    dest: /home/gianluca/.tmux.conf
+  tags: tmux

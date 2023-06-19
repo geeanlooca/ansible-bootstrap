@@ -5,20 +5,24 @@
 - name : Install core command line utilities
   import_tasks: core-utilities.yml
 
+- name: Install fancy command line utilities
+  import_tasks: fancy-utilities.yml
+
 - name: Configure git
   import_tasks: git.yml
 
-- name: Install fancy command line utilities
-  import_tasks: fancy-utilities.yml
+- name: Install and configure vim
+  import_tasks: vim.yml
+
+- name: Install and configure tmux
+  import_tasks: tmux.yml
 
 - name: Install and configure fzf  - fuzzy finder from git
   import_tasks: fzf.yml
 
-- name: Configure zsh using oh-my-zsh
-  import_tasks: oh-my-zsh.yml
+- name: Install and configure zsh using oh-my-zsh
+  import_tasks: zsh.yml
 
-- name: Install and configure vim
-  import_tasks: vim.yml
 
 
 
