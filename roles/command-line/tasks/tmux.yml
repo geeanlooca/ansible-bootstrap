@@ -5,6 +5,11 @@
     state: latest
   tags: tmux
 
+- name: Install tpm - tmux plugin manager
+  git:
+    repo: https://github.com/tmux-plugins/tpm 
+    dest: /home/gianluca/.tmux/plugins/tpm
+
 - name: Install the tmux configuration file
   copy:
     src: .tmux.conf
