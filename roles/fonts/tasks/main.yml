@@ -1,0 +1,15 @@
+---
+- name: Install fonts
+  become: true
+  package:
+    name: 
+      - ttf-fira-mono
+      - ttf-fira-sans
+      - ttf-fira-code
+      - otf-fira-mono
+      - otf-fira-sans
+      - ttf-ibm-plex
+      - ttf-ibmplex-mono-nerd
+    state: latest
+  tags: fonts
+  when: ansible_os_family == "Archlinux"
