@@ -6,7 +6,11 @@
 
 - hosts: local
   roles:
+    - core-settings
     - command-line
+    - docker
+    - fonts
+    - gui
     
 
 
