@@ -1,0 +1,54 @@
+- name: Install KDE apps
+  become: true
+  package: 
+    name:
+      - yakuake
+    state: present
+  tags: kde
+
+- name: Disable single click to open folder in KDE
+  ini_file:
+    path: /home/gianluca/.config/kdeglobals
+    section: KDE
+    option: SingleClick
+    value: false
+    backup: yes
+  tags: kde
+
+
+- name: Set monospace font in KDE
+  ini_file:
+    path: /home/gianluca/.config/kdeglobals
+    section: General
+    option: fixed
+    value: Fira Code,10,-1,5,57,0,0,0,0,0,Medium
+    backup: yes
+  tags: kde
+
+
+- name: Set Firefox shortcuts for KDE
+  ini_file:
+    path: /home/gianluca/.config/kglobalshortcutsrc
+    section: [firefox.desktop]
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+    backup: yes
+  with_items:
+    - { option: "_k_friendly_name", value: "Firefox Web Browser" }
+    - { option: "_launch", value: "Meta+U,none,Firefox Web Browser" }
+    - { option: "new-private-window", value: "Meta+Shift+P,none,New Private Window" }
+    - { option: "new-window", value: "none,none,New Window" }
+    - { option: "profile-manager-window", value: "none,none,Open the Profile Manager" }
+  tags: kde
+
+- name: Set Konsole shortcuts for KDE
+  ini_file:
+    path: /home/gianluca/.config/kglobalshortcutsrc
+    section: [org.kde.konsole.desktop]
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+    backup: yes
+  with_items:
+    - { option: "_k_friendly_name", value: "Konsole" }
+    - { option: "_launch", value: "Meta+Return,Ctrl+Alt+T,Konsole" }
+  tags: kde
