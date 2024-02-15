@@ -1,0 +1,171 @@
+# Directories and files
+
+alias green="cd /media/green/"
+alias red1="cd /media/red1/"
+alias red2="cd /media/red2/"
+alias gdocs="cd /media/green/Docs"
+
+alias repo='cd ~/Documents/repos'
+alias cb='cd -'
+
+
+# Configuration files
+alias zload='source ~/.zshrc'
+alias bload='source ~/.bashrc'
+
+
+alias cfg-hk='vim ~/.config/sxhkd/sxhkdrc'
+alias cfg-tmux='vim ~/.tmux.conf'
+alias zrc='vim ~/.zshrc'
+alias vrc='vim ~/.vimrc'
+alias nvrc='nvim ~/config/nvim/init.vim'
+alias i3c='vim ~/dotfiles/i3/.config/i3/config'
+alias elias='vim ~/.aliases'
+alias cfg-i3='vim ~/dotfiles/i3/.config/i3/config'
+alias cfg-i3blocks='vim ~/dotfiles/i3/.config/i3blocks/config'
+alias cfg-i3status='vim ~/dotfiles/i3/.config/i3status/config'
+alias cfg-compton='vim ~/dotfiles/compton/.config/compton/compton.conf'
+alias cfg-tmux='vim ~/dotfiles/tmux/.tmux.conf'
+alias cfg-rofi='vim ~/dotfiles/rofi/.config/rofi/config'
+alias cfg-mpv='vim ~/dotfiles/mpv/.config/mpv/*.conf'
+alias cfg-emacs='vim ~/dotfiles/emacs/.emacs.d/configuration.org'
+alias cfg-conda='vim ~/dotfiles/conda/.condarc'
+alias cfg-vim='vim ~/dotfiles/vim/.vimrc'
+alias cfg-htop='vim ~/dotfiles/htop/.config'
+alias ebm='vim ~/.config/surfraw/bookmarks'
+alias cfg-shortcuts='vim ~/dotfiles/sxhkd/.config/sxhkd/sxhkdrc'
+
+cfg() {
+    selected=$(fd . ~/dotfiles --hidden -t f -E .git | fzf --preview="bat {} --color=always")
+
+    if [ -n "$selected" ]; then
+        $EDITOR $selected
+    fi
+}
+
+
+# Shortcut for activating MATLAB since the license randomly expires
+alias matlab-activate='/usr/local/MATLAB/R2019b/bin/activate_matlab.sh'
+
+
+# Random shortcuts
+alias emacs='emacs -nw'
+# alias o='a -e xdg-open'
+# alias e='f -e vim'
+alias of="fzf | xargs -d '\n' -r xdg-open"
+alias ef="fzf | xargs -d '\n' -r vim"
+alias c='clear'
+alias clc='clear'
+alias q='dirs -v | head -10'
+alias :q='exit'
+alias ace='acestream-launcher -p mpv '
+alias tv="ls -t /home/gianluca/Videos/**/*.{mkv,mp4} | fzf | xargs -r -0 xdg-open"
+
+
+alias descr='tree . -d | less'
+alias desc='tree . -d'
+alias fm="pwd | xargs -d '\n' -r xdg-open"
+
+# systemd
+alias sstatus='systemctl status'
+alias senable='systemctl enable --now'
+alias sstop='systemctl stop'
+alias srestart='systemctl restart'
+
+# Conda 
+alias jn='unset BROWSER && jupyter-notebook'
+alias ce='conda env export > environment.yml'
+alias ccf='conda env create -f environment.yml'
+alias cde='conda deactivate'
+alias ci='conda install'
+
+if [ -x "$(command -v bat)" ]; then
+    alias cat='bat'
+fi
+
+alias ls='ls --color=auto'
+# if [ -x "$(command -v exa)" ]; then
+#     alias ls='exa -l'
+# fi
+
+cac() {
+    # deactivate the current environment
+    CONDA_ENV=$(conda env list | awk 'FNR > 2 {print $1}' | fzf)
+
+    if [ ! -z "$CONDA_ENV" ]; then
+        conda deactivate 
+        conda activate $CONDA_ENV
+    fi
+}
+
+#############
+# Functions #
+#############
+
+# Cheatsheets
+cs() {
+    case "$1" in
+        tmux)
+            xdg-open http://tmuxcheatsheet.com/
+            ;;
+        conda)
+            xdg-open https://conda.io/docs/_downloads/conda-cheatsheet%202019.pdf
+            ;;
+        *)
+            curl cheat.sh/$1
+            ;;
+    esac
+}
+
+# Weather
+weather() {
+    curl "wttr.in/${1}"
+}
+
+meteo(){
+    weather $1
+}
+
+# Open tomb archives
+tombopen() {
+    tomb open "${1}.tomb" -k "${1}.tomb.key" -f
+    cd "/media/${1}"
+    xdg-open "/media/${1}"
+}
+
+
+deimount(){
+    mkdir -p $HOME/dei-home
+}
+
+pse(){
+    ps -e | grep -i $1
+}
+
+# Because typing "cd .." repeatedly is boring.
+up() {
+  local x='';
+  for i in $(seq ${1:-1}); do
+    x="$x../";
+  done;
+  cd $x;
+}
+
+webm4chong() {
+    if [ ! -f "$1" ]; then
+        echo "File does not exist"
+        exit 1
+    fi
+
+    ffmpeg -i "$1" -c:v libvpx -crf 12 -b:v 500K -an -threads 4 OUTPUT.webm > /dev/null
+}
+
+fzf-bookmarks() {
+    awk '{ print $1 }' $HOME/.config/surfraw/bookmarks | fzf | xargs -r surfraw 
+}
+
+rofi-bookmarks() {
+    awk '{ print $1 }' $HOME/.config/surfraw/bookmarks | rofi -dmenu | xargs -r surfraw 
+}
+
+export DEI_USER=marcongi
