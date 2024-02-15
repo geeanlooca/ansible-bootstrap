@@ -1,4 +1,13 @@
 ---
+- name: Copy alias file
+  copy:
+    src: .aliases
+    dest: /home/gianluca/.aliases
+  tags: bash
+
+- name: Install and configure zsh using oh-my-zsh
+  import_tasks: zsh.yml
+
 - name: Setup user bin folders and path
   import_tasks: path-setup.yml
 
@@ -17,11 +26,7 @@
 - name: Install and configure tmux
   import_tasks: tmux.yml
 
-- name: Install and configure fzf  - fuzzy finder from git
-  import_tasks: fzf.yml
 
-- name: Install and configure zsh using oh-my-zsh
-  import_tasks: zsh.yml
 
 
 

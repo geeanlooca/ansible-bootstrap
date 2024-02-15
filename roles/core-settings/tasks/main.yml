@@ -1,0 +1,6 @@
+---
+- name: Disable password for sudo users
+  import_tasks: no_sudo_password.yml
+
+- name: Mount disks
+  import_tasks: desktop_disks.yml
