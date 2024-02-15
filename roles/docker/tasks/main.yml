@@ -1,0 +1,10 @@
+---
+- name: Install Docker
+  become: true
+  package:
+    name: 
+      - docker
+      - docker-compose
+    state: present
+  tags: docker
+  when: ansible_os_family == "Archlinux"
