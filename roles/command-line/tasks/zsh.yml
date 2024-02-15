@@ -1,4 +1,5 @@
 - name: Install zsh
+  become: true
   package:
     name: zsh
     state: latest
@@ -25,10 +26,16 @@
   git:
     repo: https://github.com/zsh-users/zsh-autosuggestions
     dest: /home/gianluca/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    update: false
   tags: zsh
 
 - name: Install the configuration file
   copy:
     src: .zshrc
     dest: /home/gianluca/.zshrc
+  tags: zsh
+
+- name: change user shell to zsh 
+  become: true
+  ansible.builtin.command: usermod --shell /bin/zsh gianluca
   tags: zsh
