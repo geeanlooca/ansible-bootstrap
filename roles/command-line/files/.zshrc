@@ -228,3 +228,6 @@ export PATH=/usr/local/go/bin:${PATH}:${GOPATH}/bin
 
 # Add user@hostname in the prompt
 PROMPT='%{$fg_bold[white]%}$USER@%{$fg[yellow]%}%m%}%{$fg_bold[cyan]%} %c $(git_prompt_info)%{$reset_color%}'
+
+# run only if zoxide is installed
+command -v zoxide > /dev/null && eval "$(zoxide init --cmd cd zsh)"
