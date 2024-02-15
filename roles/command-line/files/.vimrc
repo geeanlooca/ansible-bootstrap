@@ -39,6 +39,8 @@ Plugin 'unblevable/quick-scope'
 Plugin 'romainl/vim-cool'
 Plugin 'dhruvasagar/vim-zoom' " <C-w>m to toggle zoom
 Plugin 'davidhalter/jedi-vim' 
+Plugin 'catppuccin/vim'
+Plugin 'christoomey/vim-tmux-navigator'
 
 call vundle#end()            " required
 filetype plugin indent on
@@ -88,7 +90,7 @@ if has('gui_running')
 else
     " Non-GUI (terminal) colors
     " colorscheme dracula
-    colorscheme solarized8_flat
+    colorscheme catppuccin_mocha
     " colorscheme twilight256
     " colorscheme jellyx
     " colorscheme desert
@@ -201,6 +203,7 @@ autocmd FileType c,cpp,java setlocal commentstring=//\ %s
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 0
 let g:Powerline_symbols='unicode'
+let g:airline_theme = 'catppuccin_frappe'
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
