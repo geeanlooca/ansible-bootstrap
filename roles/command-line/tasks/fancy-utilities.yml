@@ -4,11 +4,25 @@
   package:
     name:
       - bat
-      - fd-find
       - ripgrep
       - ranger
       - zoxide
     state: latest
+
+- name: Install fd-find for Arch systems
+  become: true
+  package:
+    name: fd
+    state: latest
+  when: ansible_distribution == 'Archlinux'
+  
+- name: Install fd-find for Debian based systems
+  become: true
+  package:
+    name: fd-find
+    state: latest
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+
 
 - name: Symbolic link to fdfind executable for Debian based systems
   file:
@@ -23,3 +37,6 @@
     dest: /home/gianluca/.local/bin/bat
     state: link
   when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+
+
+
