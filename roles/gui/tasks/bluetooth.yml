@@ -1,0 +1,16 @@
+- name: Install bluetooth daaemon
+  become: true
+  package:
+    name: 
+      - bluez
+      - bluez-utils
+    state: present
+  tags: bluetooth
+
+- name: Start and enable bluetooth service
+  become: true
+  service:
+    name: bluetooth
+    state: started
+    enabled: yes
+  tags: bluetooth
