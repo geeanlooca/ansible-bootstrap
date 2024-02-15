@@ -1,0 +1,25 @@
+- name: Insert mounting options in /etc/fstab
+  become: true
+  lineinfile:
+    path: /etc/fstab
+    line: "{{ item }}"
+    state: present
+  with_items: 
+    -  "UUID=dcaeed94-b700-4b6b-8388-4eb751e9e5bc /media/green   ext4    rw,relatime    0   2"
+    -  "UUID=e94ed452-1b3b-41b8-8d32-62b28b1dc7e9 /media/red1   ext4    rw,relatime    0   2"
+    -  "UUID=4bb8f3a2-fd29-437a-a207-c1ae6f8689b1 /media/red2   ext4    rw,relatime    0   2"
+  register: conf
+  tags: desktop_disks
+
+- name: Debug fstab
+  debug:
+    msg: "/etc/fstab changed: {{ conf }}"
+
+
+- name: Mount disks
+  become: true
+  ansible.builtin.systemd_service:
+    name: local-fs.target
+    state: restarted
+    daemon_reload: true
+  when: conf.changed
