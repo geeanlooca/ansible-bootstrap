@@ -1,0 +1,16 @@
+---
+
+- name: Detect KDE
+  stat:
+    path: /home/gianluca/.config/kdeglobals
+  register: kde_installed
+  tags: kde gui
+
+- include_tasks: kde.yml
+  when: kde_installed.stat.exists
+
+- include_tasks: applications.yml
+  tags: gui
+
+- include_tasks: bluetooth.yml
+  tags: sudo

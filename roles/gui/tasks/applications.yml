@@ -1,0 +1,33 @@
+
+- name: Install desktop applications
+  become: true
+  package:
+    name: 
+      - mpv
+      - vlc
+      - gimp
+      - calibre
+      - firefox
+      - chromium
+  tags: gui
+
+- name: remove base vim
+  become: true
+  package:
+    name: vim
+    state: absent
+  tags: gui
+
+- name: Install gvim to obtain clipboard support
+  become: true
+  package:
+    name: gvim
+    state: latest
+  tags: gui
+
+- name: Install Spotify for Arch
+  kewlfft.aur.aur:
+    use: yay
+    name:
+      - spotify
+  when: ansible_os_family == "Archlinux"
