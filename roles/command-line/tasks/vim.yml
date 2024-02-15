@@ -1,9 +1,29 @@
-- name: Install vim and neovim
+- name: Check if gvim is installed
+  package_facts:
+    manager: auto
+
+- name: Install vim if gvim not installed
+  become: true
   package:
     name: 
       - vim
+    state: latest
+  when: "'gvim' not in ansible_facts.packages"
+  tags: vim
+
+- name: Install neovim
+  become: true
+  package:
+    name: 
       - neovim
     state: latest
+  tags: vim
+
+- name: Install ctags package
+  become: true
+  package:
+    name: ctags
+    state: present
   tags: vim
 
 - name: Install vim configuration
