@@ -11,11 +11,6 @@
   register: conf
   tags: desktop_disks
 
-- name: Debug fstab
-  debug:
-    msg: "/etc/fstab changed: {{ conf }}"
-
-
 - name: Mount disks
   become: true
   ansible.builtin.systemd_service:
