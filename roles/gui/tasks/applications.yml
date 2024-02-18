@@ -32,3 +32,17 @@
     name:
       - spotify
   when: ansible_os_family == "Archlinux"
+
+
+- name: Install texlive and components for LaTeX
+  become: true
+  package:
+    name:
+      - texlive-basic
+      - texlive-bin
+      - texlive-binextra
+      - biber
+      - texlive-bibtexextra
+      - texlive-latexrecommended
+
+  
