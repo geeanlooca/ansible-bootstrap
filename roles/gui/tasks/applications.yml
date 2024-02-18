@@ -9,6 +9,7 @@
       - calibre
       - firefox
       - chromium
+      - telegram-desktop
   tags: gui
 
 - name: remove base vim
