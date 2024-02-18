@@ -44,5 +44,7 @@
       - biber
       - texlive-bibtexextra
       - texlive-latexrecommended
+      - texlive-langenglish
+      - texlive-fontsextra
 
   
