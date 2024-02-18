@@ -7,6 +7,7 @@
       - ripgrep
       - ranger
       - zoxide
+      - eza
     state: latest
 
 - name: Install fd-find for Arch systems

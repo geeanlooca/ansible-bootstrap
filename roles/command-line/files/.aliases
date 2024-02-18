@@ -9,6 +9,7 @@ alias repo='cd ~/Documents/repos'
 alias cb='cd -'
 
 
+
 # Configuration files
 alias zload='source ~/.zshrc'
 alias bload='source ~/.bashrc'
@@ -84,9 +85,9 @@ if [ -x "$(command -v bat)" ]; then
 fi
 
 alias ls='ls --color=auto'
-# if [ -x "$(command -v exa)" ]; then
-#     alias ls='exa -l'
-# fi
+if [ -x "$(command -v exa)" ]; then
+    alias ls='exa -l'
+fi
 
 cac() {
     # deactivate the current environment
