@@ -231,3 +231,7 @@ PROMPT='%{$fg_bold[white]%}$USER@%{$fg[yellow]%}%m%}%{$fg_bold[cyan]%} %c $(git_
 
 # run only if zoxide is installed
 command -v zoxide > /dev/null && eval "$(zoxide init --cmd cd zsh)"
+
+# function to create a .gitignore file from gitignore.io
+# usage: gi python,C
+function gi() { curl -sLw \"\\\n\" https://www.toptal.com/developers/gitignore/api/\$@ ;}
